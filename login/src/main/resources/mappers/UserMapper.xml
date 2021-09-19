@@ -18,6 +18,12 @@
 		values(#{id},#{password},#{name});
 	</insert>
 	
+	<select id="checkId" resultType="int">
+		select count(*)
+		from login_user
+		where id=#{id};
+	</select>
+	
 	<delete id="delete">
 		delete from login_user
 		where id = #{id};

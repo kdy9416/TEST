@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class UserVO {
 	private String id;
-	private String pw;
+	private String password;
 	private String name;
 	private Date joinDate;
 	
@@ -15,10 +15,10 @@ public class UserVO {
 		this.id = id;
 	}
 	public String getPw() {
-		return pw;
+		return password;
 	}
 	public void setPw(String pw) {
-		this.pw = pw;
+		this.password = pw;
 	}
 	public String getName() {
 		return name;
@@ -32,6 +32,12 @@ public class UserVO {
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
+	@Override
+	public String toString() {
+		return "UserVO [id=" + id + ", pw=" + password + ", name=" + name + ", joinDate=" + joinDate + "]";
+	}
+	
+	
 	
 	
 }

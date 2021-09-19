@@ -1,10 +1,15 @@
 package com.example.login.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.login.service.LoginService;
+import com.example.login.vo.UserVO;
 
 @RestController
 public class UserController {
@@ -12,8 +17,44 @@ public class UserController {
 	@Autowired
 	LoginService service;
 	
-	@GetMapping("/test")
-	public String test() {
-		return "test";
+	//회원등록
+	@PostMapping("/")
+	public String join(@RequestBody UserVO vo) {
+		service.insert(vo);
+		System.out.println(vo);
+		return "joinSuccess";
 	}
+	
+	//아이디 중복확인
+	@PostMapping("/check")
+	public String check(@RequestBody String id) {
+		String result = null;
+		int num = service.checkId(id);
+		System.out.println(num);
+		//변수 num이 1일경우 아이디 중복 0일경우 아이디 등록가능
+		if(num == 1) {
+			System.out.println("아이디가 중복됨");
+			result="Fail";
+		}else {
+			System.out.println("아이디사용가능");
+			result="Success";
+		}
+		return result;
+	}
+	
+	//회원조회
+	@GetMapping("/{id}")
+	public UserVO selectUser(@PathVariable String id) {
+		
+		return service.getUser(id);
+	}
+	
+	//회원탈퇴
+	@DeleteMapping("/{id}")
+	public String delete(@PathVariable String id) {
+		service.delete(id);
+		return "deleteSuccess";
+	}
+	
+	
 }
