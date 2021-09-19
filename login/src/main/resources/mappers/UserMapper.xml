@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.login.repository.IUserMapper">
+
+<resultMap id="UserMap" type="com.example.login.vo.UserVO">
+	<result property="id" column="id"/>
+	<result property="password" column="password"/>
+	<result property="name" column="name"/>
+	<result property="joinDate" column="join_date"/>
+</resultMap>
+
+
+	<insert id="insert">
+		insert into login_user(id,password,name)
+		values(#{id},#{password},#{name});
+	</insert>
+	
+	<delete id="delete">
+		delete from login_user
+		where id = #{id};
+	</delete>
+	
+	<select id="getUser" resultMap="UserMap">
+		select *
+		from login_user
+		where id=#{id};
+	</select>
+	
+	
+</mapper>
