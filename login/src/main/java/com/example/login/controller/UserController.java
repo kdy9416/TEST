@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.login.service.LoginService;
 import com.example.login.vo.UserVO;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
@@ -80,5 +83,17 @@ public class UserController {
 		System.out.println(result);
 		return result;
 	}
+	
+	//로그아웃처리
+	@PostMapping("/logout")
+	public ModelAndView logout(HttpSession session) {
+		
+		if(session.getAttribute("login") != null) {
+			session.removeAttribute("login"); 
+			session.invalidate();
+		}
+		return new ModelAndView("redirect:/");
+	}
+	
 	
 }
