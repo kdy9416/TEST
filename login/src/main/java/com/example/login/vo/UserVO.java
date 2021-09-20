@@ -14,11 +14,11 @@ public class UserVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPw() {
+	public String getPassword() {
 		return password;
 	}
-	public void setPw(String pw) {
-		this.password = pw;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getName() {
 		return name;
@@ -34,7 +34,7 @@ public class UserVO {
 	}
 	@Override
 	public String toString() {
-		return "UserVO [id=" + id + ", pw=" + password + ", name=" + name + ", joinDate=" + joinDate + "]";
+		return "UserVO [id=" + id + ", password=" + password + ", name=" + name + ", joinDate=" + joinDate + "]";
 	}
 	
 	

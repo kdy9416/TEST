@@ -1,6 +1,7 @@
 package com.example.login.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.login.repository.IUserMapper;
@@ -14,7 +15,11 @@ public class LoginService implements ILoginService {
 	
 	@Override
 	public void insert(UserVO vo) {
-		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		System.out.println("암호화 전: " + vo.getPassword());
+		String securePw = encoder.encode(vo.getPassword());
+		vo.setPassword(securePw);
+		System.out.println("암호화 후: " + securePw);
 		mapper.insert(vo);
 	}
 

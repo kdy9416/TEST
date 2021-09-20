@@ -1,6 +1,9 @@
 package com.example.login.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,5 +59,26 @@ public class UserController {
 		return "deleteSuccess";
 	}
 	
+	//로그인구현
+	@PostMapping("/loginCheck")
+	public String login(@RequestBody UserVO input , HttpSession session ) {
+		
+		BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
+		System.out.println(input);
+		String result = "널";
+		UserVO db = service.getUser(input.getId());
+		if(db != null) {
+			if(encode.matches(input.getPassword(),db.getPassword())) {
+				session.setAttribute("login",db);
+				result = "loginSuccess";
+			}else {
+				result = "pwFail";
+			}
+		}else {
+			result = "idFail";
+		}
+		System.out.println(result);
+		return result;
+	}
 	
 }
