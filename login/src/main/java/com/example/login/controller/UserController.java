@@ -68,7 +68,7 @@ public class UserController {
 		
 		BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
 		System.out.println(input);
-		String result = "널";
+		String result = null;
 		UserVO db = service.getUser(input.getId());
 		if(db != null) {
 			if(encode.matches(input.getPassword(),db.getPassword())) {

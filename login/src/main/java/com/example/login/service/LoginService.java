@@ -1,5 +1,7 @@
 package com.example.login.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -39,6 +41,11 @@ public class LoginService implements ILoginService {
 	public UserVO getUser(String id) {
 		
 		return mapper.getUser(id);
+	}
+
+	@Override
+	public List<UserVO> getAllUser() {
+		return null;
 	}
 
 

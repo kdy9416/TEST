@@ -18,4 +18,6 @@ public interface ILoginService {
 		//회원정보 조회
 		UserVO getUser(String id);
 		
+		//회원정보 전체조회
+		List<UserVO> getAllUser();
 }

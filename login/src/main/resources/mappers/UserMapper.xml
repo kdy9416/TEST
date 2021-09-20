@@ -35,5 +35,10 @@
 		where id=#{id};
 	</select>
 	
+	<select id="getAllUser" resultMap="UserMap">
+		select *
+		from login_user
+	</select>
+	
 	
 </mapper>
