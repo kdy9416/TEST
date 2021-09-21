@@ -31,23 +31,7 @@ public class UserController {
 		return "joinSuccess";
 	}
 	
-	//아이디 중복확인
-	@PostMapping("/check")
-	public String check(@RequestBody String id) {
-		String result = null;
-		int num = service.checkId(id);
-		System.out.println(num);
-		//변수 num이 1일경우 아이디 중복 0일경우 아이디 등록가능
-		if(num == 1) {
-			System.out.println("아이디가 중복됨");
-			result="Fail";
-		}else {
-			System.out.println("아이디사용가능");
-			result="Success";
-		}
-		return result;
-	}
-	
+
 	//회원조회
 	@GetMapping("/{id}")
 	public UserVO selectUser(@PathVariable String id) {
@@ -94,6 +78,25 @@ public class UserController {
 		}
 		return new ModelAndView("redirect:/");
 	}
+	
+	//아이디 중복확인
+	@PostMapping("/check")
+	public String check(@RequestBody String id) {
+		String result = null;
+		int num = service.checkId(id);
+		System.out.println(num);
+		//변수 num이 1일경우 아이디 중복 0일경우 아이디 등록가능
+		if(num == 1) {
+			System.out.println("아이디가 중복됨");
+			result="Fail";
+		}else {
+			System.out.println("아이디사용가능");
+			result="Success";
+		}
+		return result;
+	}
+	
+	
 	
 	
 }
