@@ -9,7 +9,8 @@
 	<result property="id" column="id"/>
 	<result property="password" column="password"/>
 	<result property="name" column="name"/>
-	<result property="joinDate" column="join_date"/>
+	<result property="sessionId" column="session_id"/>
+	<result property="limitDate" column="limit_date"/>
 </resultMap>
 
 
@@ -39,6 +40,13 @@
 		select *
 		from login_user
 	</select>
+	
+	<update id="autoLogin">
+		update login_user
+		set session_id=#{sessionId}
+			limit_date=#{limitDate}
+		where id=#{id}
+	</update>
 	
 	
 </mapper>

@@ -7,6 +7,35 @@ public class UserVO {
 	private String password;
 	private String name;
 	private Date joinDate;
+	private boolean autoLogin;
+	private String sessionId;
+	private Date limitDate;
+	
+	
+	
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+
+	public Date getLimitDate() {
+		return limitDate;
+	}
+
+	public void setLimitDate(Date limitDate) {
+		this.limitDate = limitDate;
+	}
+
+	public boolean isAutoLogin() {
+		return autoLogin;
+	}
+	
+	public void setAutoLogin(boolean autoLogin) {
+		this.autoLogin = autoLogin;
+	}
 	
 	public String getId() {
 		return id;

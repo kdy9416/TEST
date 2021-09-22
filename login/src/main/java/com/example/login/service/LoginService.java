@@ -1,6 +1,9 @@
 package com.example.login.service;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -46,6 +49,18 @@ public class LoginService implements ILoginService {
 	@Override
 	public List<UserVO> getAllUser() {
 		return null;
+	}
+
+	@Override
+	public void autoLogin(String sessionId,Date limitDate,String id) {
+		
+		Map<String,Object> map = new HashMap<>();
+		map.put("sessionId",  sessionId);
+		map.put("limitDate",limitDate);
+		map.put("id", id);
+		
+		mapper.autoLogin(map);
+		
 	}
 
 

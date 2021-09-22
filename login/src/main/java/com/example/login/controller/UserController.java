@@ -1,5 +1,10 @@
 package com.example.login.controller;
 
+import java.util.Date;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +53,7 @@ public class UserController {
 	
 	//로그인구현
 	@PostMapping("/loginCheck")
-	public String login(@RequestBody UserVO input , HttpSession session ) {
+	public String login(@RequestBody UserVO input , HttpSession session ,HttpServletResponse response) {
 		
 		BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
 		System.out.println(input);
@@ -57,6 +62,17 @@ public class UserController {
 		if(db != null) {
 			if(encode.matches(input.getPassword(),db.getPassword())) {
 				session.setAttribute("login",db);
+				if(input.isAutoLogin()) {
+					
+					long second = 60 * 60 * 24 * 30;
+					Cookie cookie = new Cookie("loginCookie",session.getId());
+					cookie.setPath("/");
+					cookie.setMaxAge((int)second);
+				    response.addCookie(cookie);
+				    long millis = System.currentTimeMillis() + (second * 1000); 
+				    Date limitDate = new Date(millis);
+				    service.autoLogin(session.getId(),limitDate,input.getId());
+				}
 				result = "loginSuccess";
 			}else {
 				result = "pwFail";

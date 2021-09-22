@@ -1,6 +1,8 @@
 package com.example.login.repository;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -23,4 +25,7 @@ public interface IUserMapper {
 	
 	//회원정보 전체조회
 	List<UserVO> getAllUser();
+	
+	//특정 회원의 세션아이디와 쿠키 유효기간을 저장
+	void autoLogin(Map<String,Object> map);
 }
