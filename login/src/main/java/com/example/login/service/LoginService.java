@@ -63,6 +63,11 @@ public class LoginService implements ILoginService {
 		
 	}
 
+	@Override
+	public UserVO selectSession(String sessionId) {
+		return mapper.selectSession(sessionId);
+	}
+
 
 
 }
