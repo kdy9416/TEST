@@ -62,15 +62,25 @@ public class UserController {
 		if(db != null) {
 			if(encode.matches(input.getPassword(),db.getPassword())) {
 				session.setAttribute("login",db);
+				
+				//자동로그인을 체크했을시에 실행
 				if(input.isAutoLogin()) {
 					
-					long second = 60 * 60 * 24 * 30;
+					//3개월뒤의 초
+					long second = 60 * 60 * 24 * 90;
+					
+					//쿠키생성
 					Cookie cookie = new Cookie("loginCookie",session.getId());
 					cookie.setPath("/");
 					cookie.setMaxAge((int)second);
 				    response.addCookie(cookie);
+				    
+				    //3개월뒤의 밀리초를 날짜로 변환
 				    long millis = System.currentTimeMillis() + (second * 1000); 
 				    Date limitDate = new Date(millis);
+				    System.out.println(limitDate);
+				    
+				    //DB에 세션아이디,쿠키만료날짜,회원 아이디 전달
 				    service.autoLogin(session.getId(),limitDate,input.getId());
 				}
 				result = "loginSuccess";

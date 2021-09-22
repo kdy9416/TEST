@@ -61,9 +61,12 @@ public class UserVO {
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
+
 	@Override
 	public String toString() {
-		return "UserVO [id=" + id + ", password=" + password + ", name=" + name + ", joinDate=" + joinDate + "]";
+		return "UserVO [id=" + id + ", password=" + password + ", name=" + name + ", joinDate=" + joinDate
+				+ ", autoLogin=" + autoLogin + ", sessionId=" + sessionId + ", limitDate=" + limitDate + "]";
 	}
-		
+
+	
 }

@@ -43,9 +43,10 @@
 	
 	<update id="autoLogin">
 		update login_user
-		set session_id=#{sessionId}
+		set 
+			session_id=#{sessionId},
 			limit_date=#{limitDate}
-		where id=#{id}
+		where id= #{id};
 	</update>
 	
 	<select id="selectSession">

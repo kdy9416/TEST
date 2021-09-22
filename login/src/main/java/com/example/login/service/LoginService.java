@@ -55,9 +55,10 @@ public class LoginService implements ILoginService {
 	public void autoLogin(String sessionId,Date limitDate,String id) {
 		
 		Map<String,Object> map = new HashMap<>();
-		map.put("sessionId",  sessionId);
+		map.put("sessionId",sessionId);
 		map.put("limitDate",limitDate);
-		map.put("id", id);
+		map.put("id",id);
+		System.out.print(map);
 		
 		mapper.autoLogin(map);
 		
