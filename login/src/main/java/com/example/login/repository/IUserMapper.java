@@ -28,4 +28,7 @@ public interface IUserMapper {
 	
 	//특정 회원의 세션아이디와 쿠키 유효기간을 저장
 	void autoLogin(Map<String,Object> map);
+	
+	//세션아이디로 회원조회
+	UserVO selectSession(String sessionId);
 }

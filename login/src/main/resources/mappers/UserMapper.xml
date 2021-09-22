@@ -48,5 +48,11 @@
 		where id=#{id}
 	</update>
 	
+	<select id="selectSession">
+		select *
+		from login_user
+		where sessionId = #{sessionId}
+	</select>
+	
 	
 </mapper>
