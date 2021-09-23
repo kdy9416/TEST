@@ -98,9 +98,10 @@ public class UserController {
 	
 	//로그아웃처리
 	@PostMapping("/logout")
-	public String logout(HttpSession session , HttpServletRequest request) {
+	public String logout(HttpSession session , HttpServletRequest request , HttpServletResponse response) {
 		
 		UserVO user = (UserVO)session.getAttribute("login");
+		System.out.println(user);
 		if(user!= null) {
 			session.removeAttribute("login"); 
 			session.invalidate();
@@ -108,7 +109,9 @@ public class UserController {
 			
 			//자동로그인을 한 상태의 사용자가 로그아웃을 할 경우
 			if(cookie != null) {
+	
 				cookie.setMaxAge(0);
+				response.addCookie(cookie);
 				service.autoLogin("none",new Date(),user.getId());
 			}
 		}
