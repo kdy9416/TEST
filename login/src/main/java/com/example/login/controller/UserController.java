@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.example.login.service.LoginService;
 import com.example.login.vo.UserVO;
@@ -96,13 +98,21 @@ public class UserController {
 	
 	//로그아웃처리
 	@PostMapping("/logout")
-	public ModelAndView logout(HttpSession session) {
+	public String logout(HttpSession session , HttpServletRequest request) {
 		
-		if(session.getAttribute("login") != null) {
+		UserVO user = (UserVO)session.getAttribute("login");
+		if(user!= null) {
 			session.removeAttribute("login"); 
 			session.invalidate();
+			Cookie cookie = WebUtils.getCookie(request,"loginCookie");
+			
+			//자동로그인을 한 상태의 사용자가 로그아웃을 할 경우
+			if(cookie != null) {
+				cookie.setMaxAge(0);
+				service.autoLogin("none",new Date(),user.getId());
+			}
 		}
-		return new ModelAndView("redirect:/");
+		return "logoutSuccess";
 	}
 	
 	//아이디 중복확인
