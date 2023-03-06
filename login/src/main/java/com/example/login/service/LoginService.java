@@ -19,54 +19,53 @@ public class LoginService implements ILoginService {
 	IUserMapper mapper;
 	
 	@Override
-	public void insert(UserVO vo) {
+	public void insertUser(UserVO vo) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		System.out.println("암호화 전: " + vo.getPassword());
+
 		String securePw = encoder.encode(vo.getPassword());
 		vo.setPassword(securePw);
-		System.out.println("암호화 후: " + securePw);
-		mapper.insert(vo);
+
+		mapper.insertUser(vo);
 	}
 
 	@Override
-	public int checkId(String id) {
+	public int checkUserId(String id) {
 		
-		return mapper.checkId(id);
+		return mapper.checkUserId(id);
 	}
 	
 	@Override
-	public void delete(String id) {
+	public void deleteUser(String id) {
 		
-		mapper.delete(id);
+		mapper.deleteUser(id);
 	}
 
 	@Override
-	public UserVO getUser(String id) {
+	public UserVO selectUser(String id) {
 		
-		return mapper.getUser(id);
+		return mapper.selectUser(id);
 	}
 
 	@Override
-	public List<UserVO> getAllUser() {
+	public List<UserVO> selectUserList() {
 		return null;
 	}
 
 	@Override
-	public void autoLogin(String sessionId,Date limitDate,String id) {
+	public void userAutoLogin(String sessionId,Date limitDate,String id) {
 		
 		Map<String,Object> map = new HashMap<>();
 		map.put("sessionId",sessionId);
 		map.put("limitDate",limitDate);
 		map.put("id",id);
-		System.out.print(map);
 		
-		mapper.autoLogin(map);
+		mapper.userAutoLogin(map);
 		
 	}
 
 	@Override
-	public UserVO selectSession(String sessionId) {
-		return mapper.selectSession(sessionId);
+	public UserVO selectUserWithSessionId(String sessionId) {
+		return mapper.selectUserWithSessionId(sessionId);
 	}
 
 

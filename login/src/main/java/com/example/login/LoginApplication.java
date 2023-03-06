@@ -13,15 +13,5 @@ public class LoginApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LoginApplication.class, args);
 	}
-	
-	 @Bean
-	 public InternalResourceViewResolver setupViewResolver() {
-	 
-	        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-	 
-	        resolver.setPrefix("/WEB-INF/views/");
-	        resolver.setSuffix(".jsp");
-	        return resolver;
-	 }
 
 }

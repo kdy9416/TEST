@@ -14,34 +14,34 @@
 </resultMap>
 
 
-	<insert id="insert">
+	<insert id="insertUser">
 		insert into login_user(id,password,name)
 		values(#{id},#{password},#{name});
 	</insert>
 	
-	<select id="checkId" resultType="int">
+	<select id="checkUserId" resultType="int">
 		select count(*)
 		from login_user
 		where id=#{id};
 	</select>
 	
-	<delete id="delete">
+	<delete id="deleteUser">
 		delete from login_user
 		where id = #{id};
 	</delete>
 	
-	<select id="getUser" resultMap="UserMap">
+	<select id="selectUser" resultMap="UserMap">
 		select *
 		from login_user
 		where id=#{id};
 	</select>
 	
-	<select id="getAllUser" resultMap="UserMap">
+	<select id="selectUserList" resultMap="UserMap">
 		select *
 		from login_user
 	</select>
 	
-	<update id="autoLogin">
+	<update id="userAutoLogin">
 		update login_user
 		set 
 			session_id=#{sessionId},
@@ -49,7 +49,7 @@
 		where id= #{id};
 	</update>
 	
-	<select id="selectSession">
+	<select id="selectUserWithSessionId">
 		select *
 		from login_user
 		where sessionId = #{sessionId}

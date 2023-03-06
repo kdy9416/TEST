@@ -1,4 +1,4 @@
-package com.example.login.intercepter;
+package com.example.login.common.intercepter;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -26,10 +26,10 @@ public class AutoLoginIntercepter extends HandlerInterceptorAdapter{
 		 HttpSession session = request.getSession();
 		 
 		 Cookie cookie = WebUtils.getCookie(request,"loginCookie");
-		 if(cookie!=null) {
+		 if(cookie != null) {
 			 String cookieId = cookie.getValue();
-			 if(cookieId!=null) {
-				 UserVO user = service.selectSession(cookieId);
+			 if(cookieId != null) {
+				 UserVO user = service.selectUserWithSessionId(cookieId);
 				 session.setAttribute("login", user);
 			 }
 		 }
